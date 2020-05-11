@@ -1,16 +1,20 @@
 class calculateWage {
     final int wagePerHr = 20;
-    final int workHr = 8;
-    int dailyWage(){
+    int dailyWage(int workHr){
         return wagePerHr * workHr;
     }
 }
+
 class checkAttendance extends calculateWage{
-    double check = Math.floor(Math.random() * 10) % 2;
+    double check = Math.floor(Math.random() * 10) % 3;
     void isPresent(){
-        if ( check == 1) {
-            System.out.println("Employee is Present !");
-            System.out.println("Wage is "+dailyWage());
+        if ( check == 0 ) {
+            System.out.println("Employee is Present for full time !");
+            System.out.println("Wage is "+dailyWage(8));
+        }
+        else if ( check == 1 ) {
+            System.out.println("Employee is Present for part time !");
+            System.out.println("Wage is "+dailyWage(4));
         }
         else
             System.out.println("Employee is Absent !");
