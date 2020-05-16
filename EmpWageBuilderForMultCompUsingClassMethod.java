@@ -6,7 +6,7 @@ public class EmpWageBuilderForMultCompUsingClassMethod {
     public static final int NUM_OF_WORKING_DAYS = 20;
     public static final int MAX_HRS_IN_MONTH = 100;
 
-    static int totalEmpWage(int ratePerHr, int numOfDays, int hrsInMonth) {
+    static void totalEmpWage(int ratePerHr, int numOfDays, int hrsInMonth) {
         //VARIABLES
         int empHrs = 0;
         int totalEmpHrs = 0;
@@ -30,18 +30,12 @@ public class EmpWageBuilderForMultCompUsingClassMethod {
             totalEmpHrs += empHrs;
             System.out.println("Days: " + totalWorkingDays + " Emp Hours: " + empHrs);
         }
-        return totalEmpHrs * ratePerHr;
+        int totalWage = totalEmpHrs * ratePerHr;
+        System.out.println("Total Emp Wage for company company is " + totalWage);
     }
 
     public static void main(String args[]) {
-
-        EmpWageBuilderForMultCompUsingClassMethod dmart = new EmpWageBuilderForMultCompUsingClassMethod();
-        EmpWageBuilderForMultCompUsingClassMethod reliance = new EmpWageBuilderForMultCompUsingClassMethod();
-
-        int totalEmpWageOfDmart = dmart.totalEmpWage(20,20,100);
-        int totalEmpWageOfReliance = reliance.totalEmpWage(15, 25, 120);
-
-        System.out.println("Total Emp Wage for company dmart is "+totalEmpWageOfDmart);
-        System.out.println("Total Emp Wage for company reliance is "+totalEmpWageOfReliance);
+        totalEmpWage(20,20,100);
+        totalEmpWage(15, 25, 120);
     }
 }
