@@ -1,23 +1,31 @@
-public class EmpWageBuilderArray {
+import java.util.LinkedList;
+
+interface IEmpWageBuilderUC11{
+    void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth);
+
+}
+
+public class EmpWageBuilderUC11 implements IEmpWageBuilderUC11 {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
     private int numOfCompanies = 0;
-    private CompanyObj[] companies;
+    private LinkedList<CompanyObj> listOfComp;
 
-    public EmpWageBuilderArray(){
-        companies = new CompanyObj[5];
+    public void EmpWageBuilderArray(){
+        listOfComp = new LinkedList<>();
     }
 
-    void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth){
-        companies[numOfCompanies] = new CompanyObj(company, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
-        numOfCompanies++;
+    public void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth){
+        CompanyObj newWage = new CompanyObj(company, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
+        listOfComp.add(newWage);
     }
 
-    void totalEmpWage(){
-        for(int i = 0; i<numOfCompanies; i++){
-            companies[i].setTotalEmpWage(this.totalEmpWage(companies[i]));
-            System.out.println(companies[i]);
+    private void totalEmpWage(){
+        for(int i = 0; i < listOfComp.size(); i++){
+            CompanyObj tempComp = listOfComp.get(i);
+            tempComp.setTotalEmpWage(this.totalEmpWage(tempComp));
+            System.out.println(tempComp);
         }
     }
 
@@ -52,7 +60,7 @@ public class EmpWageBuilderArray {
     public static void main(String[] args){
         EmpWageBuilderArray arrObject = new EmpWageBuilderArray();
         arrObject.addCompanyEmpWage("DMart", 20, 2, 10);
-        arrObject.addCompanyEmpWage("Reliance",50, 5, 15);
+        arrObject.addCompanyEmpWage("Reliance", 50, 5, 15);
         arrObject.totalEmpWage();
     }
 }
