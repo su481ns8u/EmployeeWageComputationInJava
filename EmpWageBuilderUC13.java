@@ -1,24 +1,30 @@
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
-interface IEmpWageBuilderUC11{
+interface IEmpWageBuilderUC13{
     void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth);
     void totalEmpWage();
+    int getTotalWage();
 }
 
-public class EmpWageBuilderUC11 implements IEmpWageBuilderUC11{
+public class EmpWageBuilderUC13 {
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
     private int numOfCompanies = 0;
     private LinkedList<CompanyObj> listOfComp;
+    private Map<String, CompanyObj> mapOfComp;
 
-    public EmpWageBuilderUC11(){
+    public EmpWageBuilderUC13(){
         listOfComp = new LinkedList<>();
+        mapOfComp = new HashMap<>();
     }
 
     public void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth){
         CompanyObj newWage = new CompanyObj(company, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
         listOfComp.add(newWage);
+        mapOfComp.put(company, newWage);
     }
 
     public void totalEmpWage(){
@@ -27,6 +33,10 @@ public class EmpWageBuilderUC11 implements IEmpWageBuilderUC11{
             tempComp.setTotalEmpWage(this.totalEmpWage(tempComp));
             System.out.println(tempComp);
         }
+    }
+
+    int getTotalWage(String company){
+        return mapOfComp.get(company).totalEmpWage;
     }
 
     public int totalEmpWage(CompanyObj companyObj) {
@@ -58,9 +68,10 @@ public class EmpWageBuilderUC11 implements IEmpWageBuilderUC11{
     }
 
     public static void main(String[] args){
-        EmpWageBuilderUC11 arrObject = new EmpWageBuilderUC11();
-        arrObject.addCompanyEmpWage("DMart", 20, 2, 10);
-        arrObject.addCompanyEmpWage("Reliance", 50, 5, 15);
-        arrObject.totalEmpWage();
+        EmpWageBuilderUC13 compObj = new EmpWageBuilderUC13();
+        compObj.addCompanyEmpWage("DMart", 20, 2, 10);
+        compObj.addCompanyEmpWage("Reliance", 50, 5, 15);
+        compObj.totalEmpWage();
+        System.out.println("Total Wage for DMart Company: "+compObj.getTotalWage("DMart"));
     }
 }
